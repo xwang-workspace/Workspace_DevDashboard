@@ -1,0 +1,34 @@
+// Place all the styles related to the sandbox controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.failed {
+  //color: #c12e2a;
+  color: #d9534e;
+}
+.success {
+  color: #5cb85c;
+}
+
+.allsuccess td {
+  background-color: #8FE293;
+}
+
+#current_status h1 {
+  font-size: 6.5em;
+  padding: 0;
+  margin: 0.2em 0;
+  font-weight: bold;
+}
+#current_status .thumbnail {
+  height: 14em;
+  padding: 1.5em;
+  color: #999;
+  font-family: 'Roboto Condensed', sans-serif;
+  border: 0;
+  box-shadow: none;
+}
+.data-style-1 {
+  font-size: 3em;
+  font-weight: bold;
+  color: #666;
+}

@@ -1,0 +1,69 @@
+
+
+    <div class="container">
+    <div class="page-header">
+      <h2>PI当前状态</h2>
+    </div>
+    </div>
+
+    <div id="current_status" class="container">
+    <div class="row">
+      <div class="col-md-3 status-block">
+        <div class="thumbnail">
+          <div>当前状态:</div>
+          <div><%= @snapshots_apac[0].time %></div>
+          <div class="<%= get_status_class(@snapshots_apac[0].status) %>"><h1><%= get_status_str(@snapshots_apac[0].status) %></h1></div>
+        </div>
+      </div>
+      <div class="col-md-2 status-block">
+        <div class="thumbnail">
+          <div>MSTest错误:</div>
+          <div class="data-style-1"><%= get_failure_str(@snapshots_apac[0].mstest_failures) %> / <%= get_failure_str(@snapshots_total[0].mstest_failures) %></div>
+          <div>Selenium错误:</div>
+          <div class="data-style-1"><%= get_failure_str(@snapshots_apac[0].selenium_failures) %> / <%= get_failure_str(@snapshots_total[0].selenium_failures) %></div>
+        </div>
+      </div>
+      <div class="col-md-2 status-block">
+        <div class="thumbnail">
+          <div>代码修改:</div>
+          <div class="data-style-1"><%= @snapshots_apac[0].code_change %></div>
+          <div>SCP修改:</div>
+          <div class="data-style-1"><%= @snapshots_apac[0].scp_change %></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <table class="table table-hover">
+          <tr>
+            <th class="col-md-3">时间</th>
+            <th class="col-md-2">MSTest错误</th>
+            <th class="col-md-2">Selenium错误</th>
+            <th class="col-md-2">代码修改</th>
+            <th class="col-md-2">SCP修改</th>
+          </tr>
+
+          <% @snapshots_apac.length.times do |index| %>
+            <tr class="<%=get_tr_class(@snapshots_apac[index])%>">
+              <td><%= @snapshots_apac[index].time %> <span class="label <%=get_lable_class(@snapshots_apac[index])%>" ><%= @snapshots_apac[index].status %></span></td>
+              <td>
+                <%= @snapshots_apac[index].mstest_failures %> /
+                <%= @snapshots_total[index].mstest_failures %>
+              </td>
+              <td>
+                <%= @snapshots_apac[index].selenium_failures %> /
+                <%= @snapshots_total[index].selenium_failures %>
+              </td>
+              <td><%= @snapshots_apac[index].code_change %></td>
+              <td><%= @snapshots_apac[index].scp_change %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    </div>
+
+</div>
