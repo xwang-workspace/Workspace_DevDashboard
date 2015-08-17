@@ -2,6 +2,9 @@
 class SandboxController < ApplicationController
   def index
     @snapshots_apac = PI::Snapshot.get_current_snapshots(PI::Snapshot::SOURCE_URL_APAC)
-    @snapshots_total = PI::Snapshot.get_current_snapshots(PI::Snapshot::SOURCE_URL_TOTAL)
+    @statistics_apac = PI::Statistics.new(@snapshots_apac, PI::Team::APACLOCAL)
+
+    @snapshots_global = PI::Snapshot.get_current_snapshots(PI::Snapshot::SOURCE_URL_GLOBAL)
+    @statistics_global = PI::Statistics.new(@snapshots_global, PI::Team::GLOBAL)
   end
 end

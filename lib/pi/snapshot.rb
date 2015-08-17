@@ -5,10 +5,11 @@ require 'open-uri'
 
 module PI
 
+## 这个代表某个时点的测试快照
 class Snapshot
   attr_accessor :time, :version, :hour, :status, :code_change, :scp_change, :mstest_failures, :selenium_failures, :deployment_status
 
-  SOURCE_URL_TOTAL = "http://pi.careerbuilder.com/web/teamportal"
+  SOURCE_URL_GLOBAL = "http://pi.careerbuilder.com/web/teamportal"
   SOURCE_URL_APAC = "http://pi.careerbuilder.com/web/TeamPortal/APACLocal"
 
   def initialize(tr_node_inner_html, date)

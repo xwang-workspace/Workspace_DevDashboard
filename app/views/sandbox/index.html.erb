@@ -8,7 +8,7 @@
 
     <div id="current_status" class="container">
     <div class="row">
-      <div class="col-md-3 status-block">
+      <div class="col-md-2 status-block">
         <div class="thumbnail">
           <div>当前状态:</div>
           <div><%= @snapshots_apac[0].time %></div>
@@ -18,9 +18,9 @@
       <div class="col-md-2 status-block">
         <div class="thumbnail">
           <div>MSTest错误:</div>
-          <div class="data-style-1"><%= get_failure_str(@snapshots_apac[0].mstest_failures) %> / <%= get_failure_str(@snapshots_total[0].mstest_failures) %></div>
+          <div class="data-style-1"><%= get_failure_str(@snapshots_apac[0].mstest_failures) %> / <%= get_failure_str(@snapshots_global[0].mstest_failures) %></div>
           <div>Selenium错误:</div>
-          <div class="data-style-1"><%= get_failure_str(@snapshots_apac[0].selenium_failures) %> / <%= get_failure_str(@snapshots_total[0].selenium_failures) %></div>
+          <div class="data-style-1"><%= get_failure_str(@snapshots_apac[0].selenium_failures) %> / <%= get_failure_str(@snapshots_global[0].selenium_failures) %></div>
         </div>
       </div>
       <div class="col-md-2 status-block">
@@ -29,6 +29,22 @@
           <div class="data-style-1"><%= @snapshots_apac[0].code_change %></div>
           <div>SCP修改:</div>
           <div class="data-style-1"><%= @snapshots_apac[0].scp_change %></div>
+        </div>
+      </div>
+      <div class="col-md-2 status-block">
+        <div class="thumbnail">
+          <div>Pass:</div>
+          <div class="data-style-1"><%= @statistics_apac.num_of_pass_snapshot %> / <%= @statistics_global.num_of_pass_snapshot %></div>
+          <div>Fail:</div>
+          <div class="data-style-1"><%= @statistics_apac.num_of_fail_snapshot %> / <%= @statistics_global.num_of_fail_snapshot %> </div>
+        </div>
+      </div>
+      <div class="col-md-2 status-block">
+        <div class="thumbnail">
+          <div>MStest:</div>
+          <div class="data-style-1"><%= get_mstest_failure_percent(@statistics_apac, @statistics_global) %></div>
+          <div>Selenium:</div>
+          <div class="data-style-1"><%= get_selenium_failure_percent(@statistics_apac, @statistics_global) %></div>
         </div>
       </div>
     </div>
@@ -41,7 +57,7 @@
           <tr>
             <th class="col-md-3">时间</th>
             <th class="col-md-2">MSTest错误</th>
-            <th class="col-md-2">Selenium错误</th>
+            <th class="col-md-3">Selenium错误</th>
             <th class="col-md-2">代码修改</th>
             <th class="col-md-2">SCP修改</th>
           </tr>
@@ -51,11 +67,11 @@
               <td><%= @snapshots_apac[index].time %> <span class="label <%=get_lable_class(@snapshots_apac[index])%>" ><%= @snapshots_apac[index].status %></span></td>
               <td>
                 <%= @snapshots_apac[index].mstest_failures %> /
-                <%= @snapshots_total[index].mstest_failures %>
+                <%= @snapshots_global[index].mstest_failures %>
               </td>
               <td>
                 <%= @snapshots_apac[index].selenium_failures %> /
-                <%= @snapshots_total[index].selenium_failures %>
+                <%= @snapshots_global[index].selenium_failures %>
               </td>
               <td><%= @snapshots_apac[index].code_change %></td>
               <td><%= @snapshots_apac[index].scp_change %></td>
