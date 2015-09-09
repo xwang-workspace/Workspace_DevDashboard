@@ -35,7 +35,7 @@ private
     if (is_global_team?(team)) then
       return is_success_result?(item)
     else
-      return !apac_has_failure_or_notrun?(item)
+      return !has_failure_or_notrun?(item)
     end
   end
 
@@ -47,7 +47,7 @@ private
     team == PI::Team::GLOBAL
   end
 
-  def apac_has_failure_or_notrun?(snapshot)
+  def has_failure_or_notrun?(snapshot)
     return !((snapshot.mstest_failures == "0") && (snapshot.selenium_failures == "0"))
   end
 

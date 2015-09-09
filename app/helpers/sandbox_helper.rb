@@ -1,6 +1,10 @@
 module SandboxHelper
 
   def get_lable_class(snapshot)
+    if(is_pending?(snapshot))
+      return "label-default"
+    end
+
     if(snapshot.status == "success")
       return "label-success"
     else
@@ -8,8 +12,20 @@ module SandboxHelper
     end
   end
 
+  def get_lable_text(snapshot)
+    if(is_pending?(snapshot))
+      return "pending"
+    end
+
+    return snapshot.status
+  end
+
   def get_tr_class(snapshot)
-    if(apac_has_failure_or_notrun?(snapshot))
+    if(is_pending?(snapshot))
+      return "active"
+    end
+
+    if(has_failure_or_notrun?(snapshot))
       return "danger"
     else
       if(snapshot.status == "success")
@@ -20,23 +36,35 @@ module SandboxHelper
     end
   end
 
-  def apac_has_failure_or_notrun?(snapshot)
+  def has_failure_or_notrun?(snapshot)
     return !((snapshot.mstest_failures == "0") && (snapshot.selenium_failures == "0"))
   end
 
-  def get_status_class(status)
-    if(status == "success")
+  def is_pending?(snapshot)
+    return (snapshot.mstest_failures == 'Pending')
+  end
+
+  def get_status_class(snapshot)
+    if(is_pending?(snapshot))
+      return "default"
+    end
+
+    if(snapshot.status == "success")
       return "success"
     else
       return "failed"
     end
   end
 
-  def get_status_str(status)
-    if(status == "success")
-      return "Pass"
+  def get_status_str(snapshot)
+    if(is_pending?(snapshot)) #TODO 将is_pending等方法整理到snapshot对象内去
+      return ": |"
+    end
+
+    if(snapshot.status == "success")
+      return ": )"
     else
-      return "Fail"
+      return ": ("
     end
   end
 

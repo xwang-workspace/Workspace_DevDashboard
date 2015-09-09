@@ -12,7 +12,7 @@
         <div class="thumbnail">
           <div>当前状态:</div>
           <div><%= @snapshots_apac[0].time %></div>
-          <div class="<%= get_status_class(@snapshots_apac[0].status) %>"><h1><%= get_status_str(@snapshots_apac[0].status) %></h1></div>
+          <div class="<%= get_status_class(@snapshots_apac[0]) %>"><h1><%= get_status_str(@snapshots_apac[0]) %></h1></div>
         </div>
       </div>
       <div class="col-md-2 status-block">
@@ -64,7 +64,7 @@
 
           <% @snapshots_apac.length.times do |index| %>
             <tr class="<%=get_tr_class(@snapshots_apac[index])%>">
-              <td><%= @snapshots_apac[index].time %> <span class="label <%=get_lable_class(@snapshots_apac[index])%>" ><%= @snapshots_apac[index].status %></span></td>
+              <td><%= @snapshots_apac[index].time %> <span class="label <%=get_lable_class(@snapshots_apac[index])%>" ><%= get_lable_text(@snapshots_apac[index]) %></span></td>
               <td>
                 <%= @snapshots_apac[index].mstest_failures %> /
                 <%= @snapshots_global[index].mstest_failures %>
