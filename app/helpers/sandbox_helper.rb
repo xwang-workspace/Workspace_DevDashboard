@@ -41,7 +41,7 @@ module SandboxHelper
   end
 
   def is_pending?(snapshot)
-    return (snapshot.mstest_failures == 'Pending')
+    return (snapshot.selenium_failures == 'Pending')
   end
 
   def get_status_class(snapshot)
