@@ -7,7 +7,7 @@ module PI
 
 ## 这个代表某个时点的测试快照
 class Snapshot
-  attr_accessor :time, :version, :hour, :status, :code_change, :scp_change, :mstest_failures, :selenium_failures, :deployment_status
+  attr_accessor :time, :version, :hour, :status, :code_change, :code_changed_by, :scp_change, :scp_changed_by, :mstest_failures, :selenium_failures, :deployment_status
 
   SOURCE_URL_GLOBAL = "http://pi.careerbuilder.com/web/teamportal"
   SOURCE_URL_APAC = "http://pi.careerbuilder.com/web/TeamPortal/APACLocal"
@@ -24,11 +24,15 @@ class Snapshot
     @hour = td_node_contents[1]
     @status = td_node_contents[2]
     @code_change = td_node_contents[3]
+    @code_changed_by = PI::CodeChange.new(get_formatted_date_str(date), @hour, @version).modified_by
     @scp_change = td_node_contents[4]
+    @scp_changed_by = PI::SCPChange.new(get_formatted_date_str(date), @hour, @version).modified_by
     @mstest_failures = td_node_contents[5]
     @selenium_failures = td_node_contents[6]
     @deployment_status = td_node_contents[7]
   end
+
+
 
   def self.get_current_snapshots(source)
     snapshots = []
@@ -49,6 +53,26 @@ class Snapshot
     end
 
     return snapshots
+  end
+
+  def is_pending?
+    return (selenium_failures == 'Pending')
+  end
+
+  def get_status_text
+    if(is_pending?)
+      return ": |"
+    end
+
+    if(status == "success")
+      return ": )"
+    else
+      return ": ("
+    end
+  end
+
+  def has_failure_or_notrun?()
+    return !((mstest_failures == "0") && (selenium_failures == "0"))
   end
 
   def to_s
@@ -74,6 +98,10 @@ private
   def self.get_table_content(source)
     page = Nokogiri::HTML(open(source))
     return page.css('table.team-hourly-metrics-table').inner_html
+  end
+
+  def get_formatted_date_str(date)
+    date.strftime('%m/%d/%Y').to_s
   end
 
 end

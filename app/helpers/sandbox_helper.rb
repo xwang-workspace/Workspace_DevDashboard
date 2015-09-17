@@ -1,7 +1,7 @@
 module SandboxHelper
 
   def get_lable_class(snapshot)
-    if(is_pending?(snapshot))
+    if(snapshot.is_pending?)
       return "label-default"
     end
 
@@ -13,7 +13,7 @@ module SandboxHelper
   end
 
   def get_lable_text(snapshot)
-    if(is_pending?(snapshot))
+    if(snapshot.is_pending?)
       return "pending"
     end
 
@@ -21,11 +21,11 @@ module SandboxHelper
   end
 
   def get_tr_class(snapshot)
-    if(is_pending?(snapshot))
+    if(snapshot.is_pending?)
       return "active"
     end
 
-    if(has_failure_or_notrun?(snapshot))
+    if(snapshot.has_failure_or_notrun?)
       return "danger"
     else
       if(snapshot.status == "success")
@@ -36,16 +36,8 @@ module SandboxHelper
     end
   end
 
-  def has_failure_or_notrun?(snapshot)
-    return !((snapshot.mstest_failures == "0") && (snapshot.selenium_failures == "0"))
-  end
-
-  def is_pending?(snapshot)
-    return (snapshot.selenium_failures == 'Pending')
-  end
-
   def get_status_class(snapshot)
-    if(is_pending?(snapshot))
+    if(snapshot.is_pending?)
       return "default"
     end
 
@@ -53,18 +45,6 @@ module SandboxHelper
       return "success"
     else
       return "failed"
-    end
-  end
-
-  def get_status_str(snapshot)
-    if(is_pending?(snapshot)) #TODO 将is_pending等方法整理到snapshot对象内去
-      return ": |"
-    end
-
-    if(snapshot.status == "success")
-      return ": )"
-    else
-      return ": ("
     end
   end
 
@@ -92,5 +72,26 @@ module SandboxHelper
     end
 
     return (((statistics_apac.num_of_selenium_failure*1.0)/statistics_global.num_of_selenium_failure) * 100).round(1).to_s + "%"
+  end
+
+  ## 获取界面代码修改列表字符串的内容
+  def get_changed_by_str(changed_by)
+    member_of_apaclocal = ['xwang', 'khou', 'slian', 'xzeng', 'yzhu', 'boowilson']
+
+    if changed_by.empty? then
+      return ''
+    end
+
+    result = '  '
+    changed_by.each do |item|
+      if (member_of_apaclocal.include?(item)) then
+        result << %Q{<span class="label label-warning">#{item}</span>}
+      else
+        result << item
+      end
+      result << ', '
+    end
+
+    return result.rstrip.chop
   end
 end

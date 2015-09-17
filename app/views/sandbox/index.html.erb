@@ -12,7 +12,7 @@
         <div class="thumbnail">
           <div>当前状态:</div>
           <div><%= @snapshots_apac[0].time %></div>
-          <div class="<%= get_status_class(@snapshots_apac[0]) %>"><h1><%= get_status_str(@snapshots_apac[0]) %></h1></div>
+          <div class="<%= get_status_class(@snapshots_apac[0]) %>"><h1><%= @snapshots_apac[0].get_status_text %></h1></div>
         </div>
       </div>
       <div class="col-md-2 status-block">
@@ -52,14 +52,14 @@
 
     <div class="container">
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-11">
         <table class="table table-hover">
           <tr>
             <th class="col-md-3">时间</th>
-            <th class="col-md-2">MSTest错误</th>
-            <th class="col-md-3">Selenium错误</th>
-            <th class="col-md-2">代码修改</th>
-            <th class="col-md-2">SCP修改</th>
+            <th class="col-md-1">MSTest</th>
+            <th class="col-md-1">Selenium</th>
+            <th class="col-md-3">代码修改</th>
+            <th class="col-md-3">SCP修改</th>
           </tr>
 
           <% @snapshots_apac.length.times do |index| %>
@@ -73,8 +73,8 @@
                 <%= @snapshots_apac[index].selenium_failures %> /
                 <%= @snapshots_global[index].selenium_failures %>
               </td>
-              <td><%= @snapshots_apac[index].code_change %></td>
-              <td><%= @snapshots_apac[index].scp_change %></td>
+              <td><%= @snapshots_apac[index].code_change %><%= get_changed_by_str(@snapshots_apac[index].code_changed_by).html_safe %></td>
+              <td><%= @snapshots_apac[index].scp_change %><%= get_changed_by_str(@snapshots_apac[index].scp_changed_by).html_safe %></td>
             </tr>
           <% end %>
         </table>
