@@ -36,6 +36,7 @@ module SandboxHelper
     end
   end
 
+  ## 获取状态栏当前状态的class信息
   def get_status_class(snapshot)
     if(snapshot.is_pending?)
       return "default"
@@ -46,6 +47,24 @@ module SandboxHelper
     else
       return "failed"
     end
+  end
+
+  ## 获取代码修改的class信息
+  def get_code_change_status_class(snapshot)
+    if (snapshot.code_changed_by_apaclocal?) then
+      return 'ChangedByApaclocal'
+    end
+
+    return ''
+  end
+
+  ## 获取scp修改状态的class信息
+  def get_scp_change_status_class(snapshot)
+    if (snapshot.scp_changed_by_apaclocal?) then
+      return 'ChangedByApaclocal'
+    end
+
+    return ''
   end
 
   def get_failure_str(failure)
@@ -76,15 +95,13 @@ module SandboxHelper
 
   ## 获取界面代码修改列表字符串的内容
   def get_changed_by_str(changed_by)
-    member_of_apaclocal = ['xwang', 'khou', 'slian', 'xzeng', 'yzhu', 'boowilson']
-
     if changed_by.empty? then
       return ''
     end
 
     result = '  '
     changed_by.each do |item|
-      if (member_of_apaclocal.include?(item)) then
+      if (PI::Change::MEMBER_OF_APACLOCAL.include?(item)) then
         result << %Q{<span class="label label-warning">#{item}</span>}
       else
         result << item

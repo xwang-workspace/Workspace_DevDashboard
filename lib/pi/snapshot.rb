@@ -71,8 +71,28 @@ class Snapshot
     end
   end
 
-  def has_failure_or_notrun?()
+  def has_failure_or_notrun?
     return !((mstest_failures == "0") && (selenium_failures == "0"))
+  end
+
+  def code_changed_by_apaclocal?
+    code_changed_by.each do |item|
+      if (PI::Change::MEMBER_OF_APACLOCAL.include?(item)) then
+        return true
+      end
+    end
+
+    return false
+  end
+
+  def scp_changed_by_apaclocal?
+    scp_changed_by.each do |item|
+      if (PI::Change::MEMBER_OF_APACLOCAL.include?(item)) then
+        return true
+      end
+    end
+
+    return false
   end
 
   def to_s

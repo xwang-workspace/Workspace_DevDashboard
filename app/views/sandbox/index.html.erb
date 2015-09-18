@@ -2,7 +2,7 @@
 
     <div class="container">
     <div class="page-header">
-      <h2>PI当前状态</h2>
+      <h2>&nbsp<span class="glyphicon glyphicon-eye-open"></span>&nbsp PI当前状态</h2>
     </div>
     </div>
 
@@ -26,9 +26,9 @@
       <div class="col-md-2 status-block">
         <div class="thumbnail">
           <div>代码修改:</div>
-          <div class="data-style-1"><%= @snapshots_apac[0].code_change %></div>
+          <div class="data-style-1 <%= get_code_change_status_class(@snapshots_apac[0]) %>"><%= @snapshots_apac[0].code_change %></div>
           <div>SCP修改:</div>
-          <div class="data-style-1"><%= @snapshots_apac[0].scp_change %></div>
+          <div class="data-style-1 <%= get_scp_change_status_class(@snapshots_apac[0]) %>"><%= @snapshots_apac[0].scp_change %></div>
         </div>
       </div>
       <div class="col-md-2 status-block">
