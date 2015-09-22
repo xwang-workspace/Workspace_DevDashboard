@@ -21,7 +21,9 @@ class CodeChange < Change
     content = Nokogiri::HTML(inner_html)
     content.css("div.changeset-container div.changeset-number").each do  |item|
       /CB\\DevUsr.*CB\\(.*)/ =~ item.content
-      result << $1.strip
+      if $1 then
+        result << $1.strip
+      end
     end
     return result
   end
