@@ -7,7 +7,7 @@ module PI
 
 ## 这个代表某个时点的测试快照
 class Snapshot
-  attr_accessor :time, :version, :hour, :status, :code_change, :code_changed_by, :scp_change, :scp_changed_by, :mstest_failures, :selenium_failures, :deployment_status
+  attr_accessor :time, :version, :hour, :status, :code_change, :code_changed_by, :scp_change, :scp_changed_by, :mstest_failures, :selenium_failures, :deployment_status, :apaclocal_changed_by
 
   SOURCE_URL_GLOBAL = "http://pi.careerbuilder.com/web/teamportal"
   SOURCE_URL_APAC = "http://pi.careerbuilder.com/web/TeamPortal/APACLocal"
@@ -30,6 +30,7 @@ class Snapshot
     @mstest_failures = td_node_contents[5]
     @selenium_failures = td_node_contents[6]
     @deployment_status = td_node_contents[7]
+    @apaclocal_changed_by = get_apaclocal_changed_by(scp_changed_by, code_changed_by)
   end
 
 
@@ -102,6 +103,24 @@ class Snapshot
 
 
 private
+
+  def get_apaclocal_changed_by(scp_changed_by, code_changed_by)
+    result = []
+
+    scp_changed_by.each do |item|
+      if (PI::Change::MEMBER_OF_APACLOCAL.include?(item) && (!result.include?(item))) then
+        result << item
+      end
+    end
+
+    code_changed_by.each do |item|
+      if (PI::Change::MEMBER_OF_APACLOCAL.include?(item) && (!result.include?(item))) then
+        result << item
+      end
+    end
+
+    return result
+  end
 
   def get_time(date, hour)
     return (date + (hour * 60 * 60)).strftime("%Y-%m-%d %H:00")

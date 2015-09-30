@@ -35,7 +35,3 @@ end
 
 end
 
-
-
-changeset = PI::CodeChange.new('09/16/2015', '6', '291.24')
-puts changeset

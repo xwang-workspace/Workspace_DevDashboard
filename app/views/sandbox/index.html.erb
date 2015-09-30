@@ -50,6 +50,12 @@
     </div>
     </div>
 
+    <div id="changed_by" class="container">
+      <% @snapshots_apac[0].apaclocal_changed_by.each do |item| %>
+          <%= image_tag "#{item}.jpg", :class => "img-thumbnail"%>
+      <% end %>
+    </div>
+
     <div class="container">
     <div class="row">
       <div class="col-md-11">

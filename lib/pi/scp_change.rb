@@ -30,6 +30,3 @@ module PI
   end
 
 end
-
-changeset = PI::SCPChange.new('09/16/2015', '7', '291.25')
-puts changeset

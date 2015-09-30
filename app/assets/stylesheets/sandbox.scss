@@ -38,3 +38,15 @@
   font-weight: bold;
   color: #666;
 }
+div#changed_by {
+  width: 150px;
+  position: absolute;
+  right: 0;
+  top: 100px;
+  padding-right: 0;
+}
+#changed_by img {
+  width: 150px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 5px #333;
+}
