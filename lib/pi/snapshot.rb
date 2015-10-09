@@ -30,7 +30,7 @@ class Snapshot
     @mstest_failures = td_node_contents[5]
     @selenium_failures = td_node_contents[6]
     @deployment_status = td_node_contents[7]
-    @apaclocal_changed_by = get_apaclocal_changed_by(scp_changed_by, code_changed_by)
+    @apaclocal_changed_by = get_apaclocal_changed_by(@scp_changed_by, @code_changed_by)
   end
 
 
@@ -107,15 +107,19 @@ private
   def get_apaclocal_changed_by(scp_changed_by, code_changed_by)
     result = []
 
-    scp_changed_by.each do |item|
-      if (PI::Change::MEMBER_OF_APACLOCAL.include?(item) && (!result.include?(item))) then
-        result << item
+    if(!scp_changed_by.nil?)
+      scp_changed_by.each do |item|
+        if (PI::Change::MEMBER_OF_APACLOCAL.include?(item) && (!result.include?(item))) then
+          result << item
+        end
       end
     end
 
-    code_changed_by.each do |item|
-      if (PI::Change::MEMBER_OF_APACLOCAL.include?(item) && (!result.include?(item))) then
-        result << item
+    if(!code_changed_by.nil?)
+      code_changed_by.each do |item|
+        if (PI::Change::MEMBER_OF_APACLOCAL.include?(item) && (!result.include?(item))) then
+          result << item
+        end
       end
     end
 

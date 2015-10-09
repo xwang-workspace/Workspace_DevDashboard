@@ -14,7 +14,9 @@ class Change
     @date = date
     @hour = hour
     @version = version
-    @modified_by = get_modified_by(get_content(get_change_url(date, hour, version)))
+    if(! @version.empty?)
+      @modified_by = get_modified_by(get_content(get_change_url(date, hour, version)))
+    end
   end
 
   def to_s
@@ -43,7 +45,12 @@ class Change
   private
 
   def get_content(source)
+    p source
+
     page = Nokogiri::HTML(open(source))
+
+    p page.css('section.main-content').inner_html
+
     return page.css('section.main-content').inner_html
   end
 

@@ -95,7 +95,7 @@ module SandboxHelper
 
   ## 获取界面代码修改列表字符串的内容
   def get_changed_by_str(changed_by)
-    if changed_by.empty? then
+    if changed_by.nil? || changed_by.empty? then
       return ''
     end
 
