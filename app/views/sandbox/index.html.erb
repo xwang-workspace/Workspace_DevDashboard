@@ -88,4 +88,23 @@
     </div>
     </div>
 
+    <div class="liftInfoContainer">
+        <table class="table">
+          <tr>
+            <td class="liftLogoContainer"><img class="liftLogo" src="http://jenkins.cb-apac.com/static/60b7771b/images/headshot.png"/></td>
+
+            <% @builds.each do |build| %>
+                <td class="<%=get_lift_td_class(build)%>">
+                  <div class="data-style-2"><%= build.time.strftime('%H:%M') %></div>
+                  <div class="data-style-3"><%= build.number %></div>
+                  <div><%= build.time.strftime('%Y-%m-%d') %></div>
+                  <!--<div><%= build.result %></div>-->
+                </td>
+
+            <% end %>
+          </tr>
+
+        </table>
+      </div>
+
 </div>

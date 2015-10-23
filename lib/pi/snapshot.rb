@@ -56,6 +56,19 @@ class Snapshot
     return snapshots
   end
 
+  def self.is_table_head_row?(node_content)
+    return node_content.include? "th"
+  end
+
+  def self.is_date_row?(node_content)
+    return node_content.include? ","
+  end
+
+  def self.get_table_content(source)
+    page = Nokogiri::HTML(open(source))
+    return page.css('table.team-hourly-metrics-table').inner_html
+  end
+
   def is_pending?
     return (selenium_failures == 'Pending')
   end
@@ -130,18 +143,7 @@ private
     return (date + (hour * 60 * 60)).strftime("%Y-%m-%d %H:00")
   end
 
-  def self.is_table_head_row?(node_content)
-    return node_content.include? "th"
-  end
 
-  def self.is_date_row?(node_content)
-    return node_content.include? ","
-  end
-
-  def self.get_table_content(source)
-    page = Nokogiri::HTML(open(source))
-    return page.css('table.team-hourly-metrics-table').inner_html
-  end
 
   def get_formatted_date_str(date)
     date.strftime('%m/%d/%Y').to_s

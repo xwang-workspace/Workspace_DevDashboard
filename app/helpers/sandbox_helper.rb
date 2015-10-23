@@ -67,6 +67,16 @@ module SandboxHelper
     return ''
   end
 
+  def get_lift_td_class(build)
+    if(build.result.downcase == "success")
+      return "liftSuccess"
+    elsif(build.result.downcase == "failure")
+      return "liftFailure"
+    else
+      return ""
+    end
+  end
+
   def get_failure_str(failure)
     if(failure == 'Pending')
       return "-"

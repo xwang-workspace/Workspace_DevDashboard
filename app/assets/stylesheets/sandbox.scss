@@ -33,10 +33,18 @@
   border: 0;
   box-shadow: none;
 }
-.data-style-1 {
-  font-size: 3em;
+.data-style-1{
   font-weight: bold;
   color: #666;
+  font-size: 3em;
+}
+.data-style-2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.data-style-3 {
+  font-size: 1.2em;
+  font-weight: bold;
 }
 div#changed_by {
   width: 150px;
@@ -49,4 +57,30 @@ div#changed_by {
   width: 150px;
   margin-bottom: 10px;
   box-shadow: 0 0 5px #333;
+}
+.liftInfoContainer {
+  position: fixed;
+  bottom: 0;
+  background-color: #000;
+  padding-top: 15px;
+  width: 100%;
+}
+.liftInfoContainer td {
+  border-top: none !important;
+}
+.liftLogoContainer {
+  text-align: center;
+}
+.liftLogo {
+  vertical-align: middle;
+  margin: 0 10px;
+  width: 80px;
+}
+.liftSuccess {
+  background-color: #5cb85c;
+  color: #dff0d8;
+}
+.liftFailure {
+  background-color: #d9534f;
+  color: #f2dede;
 }
