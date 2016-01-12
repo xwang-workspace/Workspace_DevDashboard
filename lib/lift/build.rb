@@ -9,8 +9,8 @@ module Lift
   class Build
     attr_accessor :number, :time, :result
 
-    SOURCE_URL_BUILD_LIST = "http://jenkins.cb-apac.com/job/LiFT-Protractor/api/xml"
-    SOURCE_URL_BUILD_DETAIL = "http://jenkins.cb-apac.com/job/LiFT-Protractor/{job id}/api/xml"
+    SOURCE_URL_BUILD_LIST = "http://jenkins.cb-apac.com/job/LiFT-Build/api/xml"
+    SOURCE_URL_BUILD_DETAIL = "http://jenkins.cb-apac.com/job/LiFT-Build/{job id}/api/xml"
 
     def initialize(number)
       @number = number
