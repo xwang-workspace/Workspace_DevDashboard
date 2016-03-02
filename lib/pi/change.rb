@@ -8,7 +8,7 @@ module PI
 class Change
   attr_accessor :date, :hour, :version, :modified_by
 
-  MEMBER_OF_APACLOCAL = ['xwang', 'khou', 'slian', 'xzeng', 'yzhu', 'boowilson', 'lichen']
+  MEMBER_OF_APACLOCAL = ['xwang', 'khou', 'slian', 'xzeng', 'yzhu', 'boowilson', 'lichen', 'hshen']
 
   def initialize(date, hour, version)
     @date = date
