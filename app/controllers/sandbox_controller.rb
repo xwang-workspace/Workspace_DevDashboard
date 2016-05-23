@@ -7,6 +7,9 @@ class SandboxController < ApplicationController
     @snapshots_global = PI::Snapshot.get_current_snapshots(PI::Snapshot::SOURCE_URL_GLOBAL)
     @statistics_global = PI::Statistics.new(@snapshots_global, PI::Team::GLOBAL)
 
-    @builds = Lift::Build.get_builds(12)
+    @lift_builds = Jenkins::Build.get_builds(Jenkins::PROJECT_LIFT, 12)
+    @tank_builds = Jenkins::Build.get_builds(Jenkins::PROJECT_TANK, 12)
+    @auth_builds = Jenkins::Build.get_builds(Jenkins::PROJECT_AUTH, 12)
+    @arp_builds = Jenkins::Build.get_builds(Jenkins::PROJECT_ARP, 12)
   end
 end

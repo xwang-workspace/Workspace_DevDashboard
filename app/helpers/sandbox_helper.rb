@@ -67,14 +67,14 @@ module SandboxHelper
     return ''
   end
 
-  ## 获取lift build状态的class信息
-  def get_lift_td_class(build)
+  ## 获取jenkins build状态的class信息
+  def get_jenkins_td_class(build)
     if(build.result.downcase == "success")
-      return "liftSuccess"
+      return "jenkinsSuccess"
     elsif(build.result.downcase == "failure")
-      return "liftFailure"
+      return "jenkinsFailure"
     else
-      return "liftOther"
+      return "jenkinsOther"
     end
   end
 

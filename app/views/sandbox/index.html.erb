@@ -1,110 +1,178 @@
-
-
-    <div class="container">
-    <div class="page-header">
-      <h2>&nbsp<span class="glyphicon glyphicon-eye-open"></span>&nbsp PI当前状态</h2>
-    </div>
-    </div>
-
-    <div id="current_status" class="container">
-    <div class="row">
-      <div class="col-md-2 status-block">
-        <div class="thumbnail">
-          <div>当前状态:</div>
-          <div><%= @snapshots_apac[0].time %></div>
-          <div class="<%= get_status_class(@snapshots_apac[0]) %>"><h1><%= @snapshots_apac[0].get_status_text %></h1></div>
+<div class="container">
+  <div class="row">
+    <div id="pi-container" class="col-md-8">
+      <div class="container">
+        <div class="page-header">
+          <h2>&nbsp<span class="glyphicon glyphicon-eye-open"></span>&nbsp PI当前状态</h2>
         </div>
       </div>
-      <div class="col-md-2 status-block">
-        <div class="thumbnail">
-          <div>MSTest错误:</div>
-          <div class="data-style-1"><%= get_failure_str(@snapshots_apac[0].mstest_failures) %> / <%= get_failure_str(@snapshots_global[0].mstest_failures) %></div>
-          <div>Selenium错误:</div>
-          <div class="data-style-1"><%= get_failure_str(@snapshots_apac[0].selenium_failures) %> / <%= get_failure_str(@snapshots_global[0].selenium_failures) %></div>
+
+      <div id="current_status" class="container">
+        <div class="row">
+          <div class="col-md-2 status-block">
+            <div class="thumbnail">
+              <div>当前状态:</div>
+              <div><%= @snapshots_apac[0].time %></div>
+              <div class="<%= get_status_class(@snapshots_apac[0]) %>">
+                <h1><%= @snapshots_apac[0].get_status_text %></h1></div>
+            </div>
+          </div>
+          <div class="col-md-2 status-block">
+            <div class="thumbnail">
+              <div>MSTest错误:</div>
+              <div class="data-style-1"><%= get_failure_str(@snapshots_apac[0].mstest_failures) %>
+                / <%= get_failure_str(@snapshots_global[0].mstest_failures) %></div>
+              <div>Selenium错误:</div>
+              <div class="data-style-1"><%= get_failure_str(@snapshots_apac[0].selenium_failures) %>
+                / <%= get_failure_str(@snapshots_global[0].selenium_failures) %></div>
+            </div>
+          </div>
+          <div class="col-md-2 status-block">
+            <div class="thumbnail">
+              <div>代码修改:</div>
+              <div class="data-style-1 <%= get_code_change_status_class(@snapshots_apac[0]) %>"><%= @snapshots_apac[0].code_change %></div>
+              <div>SCP修改:</div>
+              <div class="data-style-1 <%= get_scp_change_status_class(@snapshots_apac[0]) %>"><%= @snapshots_apac[0].scp_change %></div>
+            </div>
+          </div>
+          <div class="col-md-2 status-block">
+            <div class="thumbnail">
+              <div>Pass:</div>
+              <div class="data-style-1"><%= @statistics_apac.num_of_pass_snapshot %>
+                / <%= @statistics_global.num_of_pass_snapshot %></div>
+              <div>Fail:</div>
+              <div class="data-style-1"><%= @statistics_apac.num_of_fail_snapshot %>
+                / <%= @statistics_global.num_of_fail_snapshot %> </div>
+            </div>
+          </div>
+          <div class="col-md-2 status-block">
+            <div class="thumbnail">
+              <div>MStest:</div>
+              <div class="data-style-1"><%= get_mstest_failure_percent(@statistics_apac, @statistics_global) %></div>
+              <div>Selenium:</div>
+              <div class="data-style-1"><%= get_selenium_failure_percent(@statistics_apac, @statistics_global) %></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-2 status-block">
-        <div class="thumbnail">
-          <div>代码修改:</div>
-          <div class="data-style-1 <%= get_code_change_status_class(@snapshots_apac[0]) %>"><%= @snapshots_apac[0].code_change %></div>
-          <div>SCP修改:</div>
-          <div class="data-style-1 <%= get_scp_change_status_class(@snapshots_apac[0]) %>"><%= @snapshots_apac[0].scp_change %></div>
-        </div>
+
+      <div id="changed_by" class="container">
+        <% @snapshots_apac[0].apaclocal_changed_by.each do |item| %>
+            <%= image_tag "#{item}.jpg", :class => "img-thumbnail" %>
+        <% end %>
       </div>
-      <div class="col-md-2 status-block">
-        <div class="thumbnail">
-          <div>Pass:</div>
-          <div class="data-style-1"><%= @statistics_apac.num_of_pass_snapshot %> / <%= @statistics_global.num_of_pass_snapshot %></div>
-          <div>Fail:</div>
-          <div class="data-style-1"><%= @statistics_apac.num_of_fail_snapshot %> / <%= @statistics_global.num_of_fail_snapshot %> </div>
-        </div>
-      </div>
-      <div class="col-md-2 status-block">
-        <div class="thumbnail">
-          <div>MStest:</div>
-          <div class="data-style-1"><%= get_mstest_failure_percent(@statistics_apac, @statistics_global) %></div>
-          <div>Selenium:</div>
-          <div class="data-style-1"><%= get_selenium_failure_percent(@statistics_apac, @statistics_global) %></div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-11">
+            <table class="table table-hover">
+              <tr>
+                <th class="col-md-3">时间</th>
+                <th class="col-md-1">MSTest</th>
+                <th class="col-md-1">Selenium</th>
+                <th class="col-md-3">代码修改</th>
+                <th class="col-md-3">SCP修改</th>
+              </tr>
+
+              <% @snapshots_apac.length.times do |index| %>
+                  <tr class="<%= get_tr_class(@snapshots_apac[index]) %>">
+                    <td><%= @snapshots_apac[index].time %>
+                      <span class="label <%= get_lable_class(@snapshots_apac[index]) %>"><%= get_lable_text(@snapshots_apac[index]) %></span>
+                    </td>
+                    <td>
+                      <%= @snapshots_apac[index].mstest_failures %> /
+                      <%= @snapshots_global[index].mstest_failures %>
+                    </td>
+                    <td>
+                      <%= @snapshots_apac[index].selenium_failures %> /
+                      <%= @snapshots_global[index].selenium_failures %>
+                    </td>
+                    <td><%= @snapshots_apac[index].code_change %><%= get_changed_by_str(@snapshots_apac[index].code_changed_by).html_safe %></td>
+                    <td><%= @snapshots_apac[index].scp_change %><%= get_changed_by_str(@snapshots_apac[index].scp_changed_by).html_safe %></td>
+                  </tr>
+              <% end %>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-    </div>
 
-    <div id="changed_by" class="container">
-      <% @snapshots_apac[0].apaclocal_changed_by.each do |item| %>
-          <%= image_tag "#{item}.jpg", :class => "img-thumbnail"%>
-      <% end %>
-    </div>
+    <div id="jenkins-container" class="col-md-3">
+      <div class="row">
+        <div id="jenkins-head">
+          <img id="jenkins-head-icon" alt="title" src="http://jenkins.cbapac.net/static/a993060a/images/headshot.png">
+          <img id="jenkins-name-icon" height="34" alt="title" width="139" src="http://jenkins.cbapac.net/static/a993060a/images/title.png">
+        </div>
+      </div>
 
-    <div class="container">
-    <div class="row">
-      <div class="col-md-11">
-        <table class="table table-hover">
-          <tr>
-            <th class="col-md-3">时间</th>
-            <th class="col-md-1">MSTest</th>
-            <th class="col-md-1">Selenium</th>
-            <th class="col-md-3">代码修改</th>
-            <th class="col-md-3">SCP修改</th>
-          </tr>
-
-          <% @snapshots_apac.length.times do |index| %>
-            <tr class="<%=get_tr_class(@snapshots_apac[index])%>">
-              <td><%= @snapshots_apac[index].time %> <span class="label <%=get_lable_class(@snapshots_apac[index])%>" ><%= get_lable_text(@snapshots_apac[index]) %></span></td>
-              <td>
-                <%= @snapshots_apac[index].mstest_failures %> /
-                <%= @snapshots_global[index].mstest_failures %>
-              </td>
-              <td>
-                <%= @snapshots_apac[index].selenium_failures %> /
-                <%= @snapshots_global[index].selenium_failures %>
-              </td>
-              <td><%= @snapshots_apac[index].code_change %><%= get_changed_by_str(@snapshots_apac[index].code_changed_by).html_safe %></td>
-              <td><%= @snapshots_apac[index].scp_change %><%= get_changed_by_str(@snapshots_apac[index].scp_changed_by).html_safe %></td>
+      <div class="row">
+        <div class="projectContainer">
+          <table class="table">
+            <tr class="jenkins-project lift">
+              <td><strong>LiFT</strong></td>
             </tr>
-          <% end %>
-        </table>
-      </div>
-    </div>
-    </div>
-
-    <div class="liftInfoContainer">
-        <table class="table">
-          <tr>
-            <td class="liftLogoContainer"><img class="liftLogo" src="http://jenkins.cb-apac.com/static/60b7771b/images/headshot.png"/></td>
-
-            <% @builds.each do |build| %>
-                <td class="<%=get_lift_td_class(build)%>">
-                  <div class="data-style-2"><%= build.time.strftime('%H:%M') %></div>
-                  <div class="data-style-3"><%= build.number %></div>
-                  <div><%= build.time.strftime('%Y-%m-%d') %></div>
-                  <!--<div><%= build.result %></div>-->
-                </td>
-
+            <% @lift_builds.each do |build| %>
+                <tr>
+                  <td class="<%= get_jenkins_td_class(build) %>">
+                    <div class="data-style-2"><%= build.time.strftime('%H:%M') %></div>
+                    <div class="data-style-3"><%= build.number %> <%= build.time.strftime('%m-%d') %></div>
+                  </td>
+                </tr>
             <% end %>
-          </tr>
+          </table>
+        </div>
 
-        </table>
+        <div class="projectContainer">
+          <table class="table">
+            <tr class="jenkins-project tank">
+              <td><strong>Tank</strong></td>
+            </tr>
+            <% @tank_builds.each do |build| %>
+                <tr>
+                  <td class="<%= get_jenkins_td_class(build) %>">
+                    <div class="data-style-2"><%= build.time.strftime('%H:%M') %></div>
+                    <div class="data-style-3"><%= build.number %> <%= build.time.strftime('%m-%d') %></div>
+                  </td>
+                </tr>
+            <% end %>
+          </table>
+        </div>
+
+        <div class="projectContainer">
+          <table class="table">
+            <tr class="jenkins-project cvcs">
+              <td><strong>Auth</strong></td>
+            </tr>
+            <% @auth_builds.each do |build| %>
+                <tr>
+                  <td class="<%= get_jenkins_td_class(build) %>">
+                    <div class="data-style-2"><%= build.time.strftime('%H:%M') %></div>
+                    <div class="data-style-3"><%= build.number %> <%= build.time.strftime('%m-%d') %></div>
+                  </td>
+                </tr>
+            <% end %>
+          </table>
+        </div>
+
+        <div class="projectContainer">
+          <table class="table">
+            <tr class="jenkins-project arp">
+              <td><strong>ARP</strong></td>
+            </tr>
+            <% @arp_builds.each do |build| %>
+                <tr>
+                  <td class="<%= get_jenkins_td_class(build) %>">
+                    <div class="data-style-2"><%= build.time.strftime('%H:%M') %></div>
+                    <div class="data-style-3"><%= build.number %> <%= build.time.strftime('%m-%d') %></div>
+                  </td>
+                </tr>
+            <% end %>
+          </table>
+        </div>
+
       </div>
 
+    </div>
+  </div>
+</div>
 </div>

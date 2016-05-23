@@ -12,6 +12,8 @@ class Snapshot
   SOURCE_URL_GLOBAL = "http://pi.careerbuilder.com/web/teamportal"
   SOURCE_URL_APAC = "http://pi.careerbuilder.com/web/TeamPortal/APACLocal"
 
+  MAX_COUNT_OF_SNAPSHOT = 12
+
   def initialize(tr_node_inner_html, date)
     td_node_contents = []
 
@@ -37,6 +39,7 @@ class Snapshot
 
   def self.get_current_snapshots(source)
     snapshots = []
+    count_of_snapshot = 0
 
     table_inner_html = Nokogiri::HTML(get_table_content(source))
 
@@ -51,6 +54,9 @@ class Snapshot
       end
 
       snapshots << Snapshot.new(Nokogiri::HTML(tr_node.inner_html), @time)
+
+      count_of_snapshot += 1
+      break if count_of_snapshot >= MAX_COUNT_OF_SNAPSHOT
     end
 
     return snapshots
@@ -142,8 +148,6 @@ private
   def get_time(date, hour)
     return (date + (hour * 60 * 60)).strftime("%Y-%m-%d %H:00")
   end
-
-
 
   def get_formatted_date_str(date)
     date.strftime('%m/%d/%Y').to_s
