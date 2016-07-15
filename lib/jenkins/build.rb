@@ -19,8 +19,8 @@ module Jenkins
   TANK_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/Tank-Build/api/xml"
   TANK_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/Tank-Build/{job id}/api/xml"
 
-  AUTH_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/Auth-Service-Build/api/xml"
-  AUTH_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/Auth-Service-Build/{job id}/api/xml"
+  AUTH_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/FT-Shared-Build/api/xml"
+  AUTH_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/FT-Shared-Build/{job id}/api/xml"
 
   ARP_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/ARP-Test-Environment-Build/api/xml"
   ARP_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/ARP-Test-Environment-Build/{job id}/api/xml"
