@@ -9,7 +9,7 @@ module Jenkins
   # 项目定义
   PROJECT_LIFT = 1
   PROJECT_TANK = 2
-  PROJECT_AUTH = 3
+  PROJECT_FT = 3
   PROJECT_ARP = 4
 
   # Build URL定义
@@ -19,8 +19,8 @@ module Jenkins
   TANK_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/Tank-Build/api/xml"
   TANK_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/Tank-Build/{job id}/api/xml"
 
-  AUTH_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/FT-Shared-Build/api/xml"
-  AUTH_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/FT-Shared-Build/{job id}/api/xml"
+  FT_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/Fulfillment-Tools-Build/api/xml"
+  FT_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/Fulfillment-Tools-Build/{job id}/api/xml"
 
   ARP_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/ARP-Test-Environment-Build/api/xml"
   ARP_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/ARP-Test-Environment-Build/{job id}/api/xml"
@@ -79,8 +79,8 @@ private
           return Jenkins::LIFT_SOURCE_URL_BUILD_LIST
         when Jenkins::PROJECT_TANK
           return Jenkins::TANK_SOURCE_URL_BUILD_LIST
-        when Jenkins::PROJECT_AUTH
-          return Jenkins::AUTH_SOURCE_URL_BUILD_LIST
+        when Jenkins::PROJECT_FT
+          return Jenkins::FT_SOURCE_URL_BUILD_LIST
         when Jenkins::PROJECT_ARP
           return Jenkins::ARP_SOURCE_URL_BUILD_LIST
         else
@@ -94,8 +94,8 @@ private
           return Jenkins::LIFT_SOURCE_URL_BUILD_DETAIL.sub("{job id}", number.to_s)
         when Jenkins::PROJECT_TANK
           return Jenkins::TANK_SOURCE_URL_BUILD_DETAIL.sub("{job id}", number.to_s)
-        when Jenkins::PROJECT_AUTH
-          return Jenkins::AUTH_SOURCE_URL_BUILD_DETAIL.sub("{job id}", number.to_s)
+        when Jenkins::PROJECT_FT
+          return Jenkins::FT_SOURCE_URL_BUILD_DETAIL.sub("{job id}", number.to_s)
         when Jenkins::PROJECT_ARP
           return Jenkins::ARP_SOURCE_URL_BUILD_DETAIL.sub("{job id}", number.to_s)
         else

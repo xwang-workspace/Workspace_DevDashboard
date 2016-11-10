@@ -9,7 +9,7 @@ class SandboxController < ApplicationController
 
     @lift_builds = Jenkins::Build.get_builds(Jenkins::PROJECT_LIFT, 12)
     @tank_builds = Jenkins::Build.get_builds(Jenkins::PROJECT_TANK, 12)
-    @auth_builds = Jenkins::Build.get_builds(Jenkins::PROJECT_AUTH, 12)
+    @auth_builds = Jenkins::Build.get_builds(Jenkins::PROJECT_FT, 12)
     @arp_builds = Jenkins::Build.get_builds(Jenkins::PROJECT_ARP, 12)
   end
 end
