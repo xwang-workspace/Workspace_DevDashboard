@@ -13,17 +13,17 @@ module Jenkins
   PROJECT_ARP = 4
 
   # Build URL定义
-  LIFT_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/LiFT-Build/api/xml"
-  LIFT_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/LiFT-Build/{job id}/api/xml"
+  LIFT_SOURCE_URL_BUILD_LIST = "https://jenkins.cbapac.net/job/LiFT-Build/api/xml"
+  LIFT_SOURCE_URL_BUILD_DETAIL = "https://jenkins.cbapac.net/job/LiFT-Build/{job id}/api/xml"
 
-  TANK_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/Tank-Build/api/xml"
-  TANK_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/Tank-Build/{job id}/api/xml"
+  TANK_SOURCE_URL_BUILD_LIST = "https://jenkins.cbapac.net/job/Tank-Build/api/xml"
+  TANK_SOURCE_URL_BUILD_DETAIL = "https://jenkins.cbapac.net/job/Tank-Build/{job id}/api/xml"
 
-  FT_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/Fulfillment-Tools-Build/api/xml"
-  FT_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/Fulfillment-Tools-Build/{job id}/api/xml"
+  FT_SOURCE_URL_BUILD_LIST = "https://jenkins.cbapac.net/job/Fulfillment-Tools-Build/api/xml"
+  FT_SOURCE_URL_BUILD_DETAIL = "https://jenkins.cbapac.net/job/Fulfillment-Tools-Build/{job id}/api/xml"
 
-  ARP_SOURCE_URL_BUILD_LIST = "http://jenkins.cbapac.net/job/ARP-Test-Environment-Build/api/xml"
-  ARP_SOURCE_URL_BUILD_DETAIL = "http://jenkins.cbapac.net/job/ARP-Test-Environment-Build/{job id}/api/xml"
+  ARP_SOURCE_URL_BUILD_LIST = "https://jenkins.cbapac.net/job/ARP-Test-Build/api/xml"
+  ARP_SOURCE_URL_BUILD_DETAIL = "https://jenkins.cbapac.net/job/ARP-Test-Build/{job id}/api/xml"
 
 
   class Build
